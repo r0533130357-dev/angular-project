@@ -16,14 +16,20 @@ export class CommentSection {
   taskId = input.required<number>(); 
   comments = signal<TaskComment[]>([]);
   newCommentBody = signal<string>('');
-
-  ngOnInit() {
-    this.commentsService.getComments(this.taskId()).subscribe(res => {
-      this.comments.set(res);
+  isLoading = signal<boolean>(false);
+ngOnInit() {
+    this.isLoading.set(true);
+    this.commentsService.getComments(this.taskId()).subscribe({
+      next: (res) => {
+        this.comments.set(res);
+        this.isLoading.set(false);
+      },
+      error: (err) => {
+        console.error('שגיאה בטעינת תגובות:', err);
+        this.isLoading.set(false);
+      }
     });
   }
-
-
 
   postComment() {
     if (!this.newCommentBody().trim()) return;

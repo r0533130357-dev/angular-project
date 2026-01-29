@@ -16,12 +16,20 @@ private projectsService=inject(ProjectsService);
 projects$ = this.projectsService.projects$;
  showAddProject = signal<boolean>(false);
 teamId = signal<number>(Number(location.pathname.split('/')[3]));
+isLoading = signal<boolean>(false);
  
 ngOnInit(): void {
-  this.projectsService.getProjects().subscribe({
-    error: (err) => console.error('שגיאה בטעינת פרויקטים:', err)
-  });
-}
+    this.isLoading.set(true);
+    this.projectsService.getProjects().subscribe({
+      next: () => {
+        this.isLoading.set(false); 
+      },
+      error: (err) => {
+        console.error('שגיאה בטעינת פרויקטים:', err);
+        this.isLoading.set(false); 
+      }
+    });
+  }
 CreateProject(): void { 
 }
  openCreateProjectModal(): void {

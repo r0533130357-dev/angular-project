@@ -1,13 +1,22 @@
 <div class="comments-container">
-  <div class="comments-list">
-    @for (comment of comments(); track comment.id) {
-      <div class="comment-item">
-        <span class="user-name">משתמש #{{comment.user_id}}:</span>
-        <p class="comment-body">{{ comment.body }}</p>
-        <small class="comment-date">{{ comment.created_at | date:'short' }}</small>
-      </div>
-    }
-  </div>
+  
+  @if (isLoading()) {
+    <div class="mini-loader">
+      טוען תגובות...
+    </div>
+  } @else {
+    <div class="comments-list">
+      @for (comment of comments(); track comment.id) {
+        <div class="comment-item">
+          <span class="user-name">משתמש #{{comment.user_id}}:</span>
+          <p class="comment-body">{{ comment.body }}</p>
+          <small class="comment-date">{{ comment.created_at | date:'short' }}</small>
+        </div>
+      } @empty {
+        <p class="no-comments">אין תגובות עדיין.</p>
+      }
+    </div>
+  }
 
   <div class="add-comment">
     <input 
@@ -15,6 +24,7 @@
       placeholder="הוסף תגובה..." 
       (keyup.enter)="postComment()" 
     />
-    <button (click)="postComment()" [disabled]="!newCommentBody().trim()">שלח</button>
+    <button (click)="postComment()" [disabled]="!newCommentBody().trim()">
+    </button>
   </div>
 </div>

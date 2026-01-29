@@ -3,12 +3,14 @@ import { inject, Injectable, signal } from '@angular/core';
 import { BehaviorSubject, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { AuthResponse, LoginData, RegisterData, User } from '../models/model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Auth {
   private http = inject(HttpClient);
+  private router = inject(Router)
   private baseUrl = `${environment.apiUrl}/auth`;
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
@@ -44,6 +46,7 @@ export class Auth {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('user');
     this.isLoggedIn.set(false);
+    this.router.navigate(['/login']);
   }
 
   private saveSession(res: AuthResponse) {

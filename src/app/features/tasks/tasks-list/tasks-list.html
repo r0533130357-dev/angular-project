@@ -3,46 +3,54 @@
         <h1>משימות פרויקט #{{ projectId() }}</h1>
         <button class="btn-primary" (click)="openCreateTaskModal()">+ משימה חדשה</button>
     </div>
+
     @if (showAddTask()) {
-    <app-new-tasks [projectId]="projectId()">
-    </app-new-tasks>
+        <app-new-tasks [projectId]="projectId()" (close)="showAddTask.set(false)"></app-new-tasks>
     }
+
     @if (showEditTask()) {
-    <app-update-task [task]="selectedTask()"> </app-update-task>
+        <app-update-task [task]="selectedTask()" (close)="showEditTask.set(false)"></app-update-task>
     }
-    <div class="tasks-grid">
-        @if (tasks$ | async; as tasks) {
-        @for (task of tasks; track task.id) {
-        <div class="task-card">
-            <div class="task-priority" [ngClass]="task.priority">
-                {{ task.priority }}
-            </div>
 
-            <div class="card-content">
-                <h3>{{ task.title }}</h3>
-                <p>{{ task.description }}</p>
-                <div class="task-meta">
-                    <span>Status: <strong>{{ task.status }}</strong></span>
-                    <span>Due: {{ task.due_date | date:'shortDate' }}</span>
-                </div>
-            </div>
-            <div class="task-card">
-                <hr /> <app-comment-section [taskId]="task.id"></app-comment-section>
-            </div>
-
-            <div class="card-actions">
-                <button (click)="openEditTaskModal(task)" class="btn-edit">ערוך ✏️</button>
-
-                <button (click)="deleteTask(task.id)" class="btn-delete">מחק 🗑️</button>
-            </div>
+    @if (isLoading()) {
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <p>טוען משימות...</p>
         </div>
-        } @empty {
-        <div class="empty-state">
-            <p>אין משימות בפרויקט זה. הגיע הזמן לתכנן!</p>
+    } @else {
+        <div class="tasks-grid">
+            @if (tasks$ | async; as tasks) {
+                @for (task of tasks; track task.id) {
+                    <div class="task-card">
+                        <div class="task-priority" [ngClass]="task.priority">
+                            {{ task.priority }}
+                        </div>
+
+                        <div class="card-content">
+                            <h3>{{ task.title }}</h3>
+                            <p>{{ task.description }}</p>
+                            <div class="task-meta">
+                                <span>Status: <strong>{{ task.status }}</strong></span>
+                                <span>Due: {{ task.due_date | date:'shortDate' }}</span>
+                            </div>
+                        </div>
+
+                        <div class="comments-wrapper">
+                            <hr />
+                            <app-comment-section [taskId]="task.id"></app-comment-section>
+                        </div>
+
+                        <div class="card-actions">
+                            <button (click)="openEditTaskModal(task)" class="btn-edit">ערוך ✏️</button>
+                            <button (click)="deleteTask(task.id)" class="btn-delete">מחק 🗑️</button>
+                        </div>
+                    </div>
+                } @empty {
+                    <div class="empty-state">
+                        <p>אין משימות בפרויקט זה. הגיע הזמן לתכנן!</p>
+                    </div>
+                }
+            }
         </div>
-        }
-        } @else {
-        <div class="loader">טוען משימות...</div>
-        }
-    </div>
+    }
 </div>

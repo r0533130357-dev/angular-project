@@ -1,4 +1,11 @@
 <div class="container">
+  @if (isLoading()) {
+    <div class="loader-container">
+      <div class="spinner"></div>
+      <p>טוען משימות, כבר חוזרים...</p>
+    </div>
+  }
+  @else {
 <h1>הצוותים שלי</h1>
 <div class="container">
   <button (click)="openCreateTeamModal()">+ הוסף צוות חדש</button>
@@ -44,4 +51,5 @@
       <div class="loader">טוען צוותים...</div>
     }
   </div>
+}
 </div>

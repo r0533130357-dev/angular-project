@@ -25,14 +25,23 @@ export class TasksList {
   showAddTask = signal<boolean>(false);
   showEditTask = signal<boolean>(false);
   selectedTask = signal<Task>({} as Task);
+  isLoading = signal<boolean>(false);
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('projectId'));
     if (id) {
       this.projectId.set(id);
+      this.isLoading.set(true); 
+      
       this.tasksService.getTasks(id).subscribe({
-      error: (err) => console.error('שגיאה בטעינת משימות:', err)
-    });
+        next: () => {
+          this.isLoading.set(false); 
+        },
+        error: (err) => {
+          console.error('שגיאה בטעינת משימות:', err);
+          this.isLoading.set(false); 
+        }
+      });
     }
   }
 
