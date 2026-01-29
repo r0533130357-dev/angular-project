@@ -1,0 +1,172 @@
+/* קונטיינר ראשי */
+.projects-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  direction: rtl; /* יישור לימין */
+}
+
+/* כותרת עליונה */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 1rem;
+}
+
+.title-section h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #2c3e50;
+}
+
+.team-badge {
+  background: #eef2f7;
+  color: #5d6d7e;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* כפתור יצירה */
+.btn-primary {
+  background-color: #7b68ee; /* סגול-כחול של ClickUp */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s, background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary:hover {
+  background-color: #6a56e5;
+  transform: translateY(-2px);
+}
+
+/* גריד של כרטיסיות */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* כרטיסיית פרויקט */
+.project-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e0e6ed;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  transition: box-shadow 0.3s, border-color 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  border-color: #7b68ee;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  background-color: #2ecc71; /* ירוק סטטוס */
+  border-radius: 50%;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #34495e;
+}
+
+/* גוף הכרטיסייה */
+.card-body {
+  color: #7f8c8d;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.card-body p {
+  margin: 5px 0;
+}
+
+.created-at {
+  font-size: 0.8rem;
+  color: #bdc3c7;
+  margin-top: 10px;
+}
+
+/* כפתורי פעולה בכרטיסייה */
+.btn-outline {
+  width: 100%;
+  background: transparent;
+  border: 1.5px solid #7b68ee;
+  color: #7b68ee;
+  padding: 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-outline:hover {
+  background: #7b68ee;
+  color: white;
+}
+
+/* מצב טעינה */
+.loading-spinner {
+  text-align: center;
+  grid-column: 1 / -1;
+  padding: 3rem;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #7b68ee;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* מצב ריק */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem;
+  background: #f9fafc;
+  border-radius: 15px;
+  border: 2px dashed #dcdde1;
+}
+
+.empty-state p {
+  color: #7f8c8d;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}

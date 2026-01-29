@@ -1,0 +1,54 @@
+<div class="projects-container">
+    <header class="page-header">
+        <div class="title-section">
+            <h1>פרויקטים</h1>
+            <span class="team-badge">ID צוות: {{ teamId() }}</span>
+        </div>
+        <button class="btn-primary" (click)="openCreateProjectModal()">
+            <i class="plus-icon">+</i> פרויקט חדש
+        </button>
+    </header>
+
+    @if (showAddProject()) {
+    <app-new-project></app-new-project>
+    }
+    <div class="projects-grid">
+        @if (projects$ | async; as projects) {
+
+        @for (project of projects; track project.id) {
+        <div class="project-card">
+            <div class="card-header">
+                <span class="status-dot"></span>
+                <h3>{{ project.name }}</h3>
+            </div>
+
+            <div class="card-body">
+                <p> תאור: {{ project.discription }}</p>
+                <p> סטטוס: {{ project.status }}</p>
+                <p class="created-at">נוצר בתאריך: {{ project.created_at | date:'shortDate' }}</p>
+
+
+            </div>
+
+            <div class="card-actions">
+                <button [routerLink]="['/dashboard', 'team', teamId(), 'projects', project.id, 'tasks']">
+                    צפה במשימות
+                </button>
+            </div>
+        </div>
+        } @empty {
+        <div class="empty-state">
+
+            <p>לא נמצאו פרויקטים לצוות זה.</p>
+            <button (click)="CreateProject()">צור את הפרויקט הראשון!</button>
+        </div>
+        }
+
+        } @else {
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>טוען פרויקטים...</p>
+        </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,17 @@
+
+<form [formGroup]="AddMemberForm" (ngSubmit)="onSubmit()">
+    <div>
+  <label for="userId">ID של המשתמש</label>
+    <input
+      formControlName="userId"
+      placeholder="הכנס מזהה חבר "
+    />
+     @if (AddMemberForm.get('userId')?.touched && AddMemberForm.get('userId')?.invalid) {
+      <small>
+        @if (AddMemberForm.get('userId')?.errors?.['required']) {
+          מזהה חבר הוא שדה חובה
+        }
+      </small>
+    }
+  </div>
+  <button type="submit" [disabled]="AddMemberForm.invalid">Create Member</button>

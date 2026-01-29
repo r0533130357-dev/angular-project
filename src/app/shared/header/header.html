@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <div class="logo">
+    <a routerLink="/">My App</a>
+  </div>
+
+  <div class="menu">
+
+    @if (authService.isLoggedIn()) {
+      <a routerLink="/dashboard" routerLinkActive="active">דשבורד</a>
+      <button class="logout-btn" (click)="authService.logout()">התנתק</button>
+    } 
+    @else {
+      <a routerLink="/login" routerLinkActive="active">התחברות</a>
+      <a routerLink="/register" routerLinkActive="active">הרשמה</a>
+    }
+  </div>
+</nav>

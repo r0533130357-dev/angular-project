@@ -1,0 +1,47 @@
+<div class="container">
+<h1>הצוותים שלי</h1>
+<div class="container">
+  <button (click)="openCreateTeamModal()">+ הוסף צוות חדש</button>
+
+  <div class="grid">
+    </div>
+
+  @if (showAddTeam()) {
+    <app-new-team ></app-new-team>
+  }
+</div>
+ @if (showAddMember()) {
+    <app-new-member [teamId]="selectedTeamId()"></app-new-member>
+  }
+
+  <div class="teams-grid">
+    @if (this.team$| async; as teams) {
+      
+      @for (team of teams; track team.id) {
+        <div class="team-card">
+          <div class="card-content">
+            <h3>{{ team.name }}</h3>
+            <p><i class="members-icon">👥</i> {{ team.members_count }} חברים</p>
+            <h2>{{team.created_at| date:'shortDate'}}</h2>
+          </div>
+          <div class="card-actions">
+         <button [routerLink]="['/dashboard', 'team', team.id, 'projects']" class="btn-view">
+    צפה בפרויקטים
+  </button>
+   <button (click)="openAddMemberModal(team.id)" class="btn-view secondary">
+    הוספת חבר לצוות
+  </button>
+   
+          </div>
+        </div>
+      } @empty {
+        <div class="empty-state">
+          <p>עדיין אין לך צוותים. זה הזמן ליצור אחד!</p>
+        </div>
+      }
+
+    } @else {
+      <div class="loader">טוען צוותים...</div>
+    }
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+  <!-- שם מלא -->
+  <div>
+    <label for="name">שם מלא</label>
+    <input
+      id="name"
+      type="text"
+      formControlName="name"
+      placeholder="הכנס שם מלא"
+    />
+    @if (registerForm.get('name')?.touched && registerForm.get('name')?.invalid) {
+      <small>
+        @if (registerForm.get('name')?.errors?.['required']) {
+          שם הוא שדה חובה
+        }
+        @if (registerForm.get('name')?.errors?.['minlength']) {
+          השם חייב להכיל לפחות 2 תווים
+        }
+      </small>
+    }
+  </div>
+
+  <!-- אימייל -->
+  <div>
+    <label for="email">אימייל</label>
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      placeholder="הכנס אימייל"
+    />
+    @if (registerForm.get('email')?.touched && registerForm.get('email')?.invalid) {
+      <small>
+        @if (registerForm.get('email')?.errors?.['required']) {
+          אימייל הוא שדה חובה
+        }
+        @if (registerForm.get('email')?.errors?.['email']) {
+          אימייל לא תקין
+        }
+      </small>
+    }
+  </div>
+
+  <!-- סיסמה -->
+  <div>
+    <label for="password">סיסמה</label>
+    <input
+      id="password"
+      type="password"
+      formControlName="password"
+      placeholder="הכנס סיסמה"
+    />
+    @if (registerForm.get('password')?.touched && registerForm.get('password')?.invalid) {
+      <small>
+        @if (registerForm.get('password')?.errors?.['required']) {
+          סיסמה היא שדה חובה
+        }
+        @if (registerForm.get('password')?.errors?.['minlength']) {
+          הסיסמה חייבת להכיל לפחות 6 תווים
+        }
+      </small>
+    }
+  </div>
+
+  <button type="submit" [disabled]="registerForm.invalid">Register</button>
+</form>
+   <p>
+    יש לך כבר חשבון?
+    <a routerLink="/login">התחבר</a>
+  </p>

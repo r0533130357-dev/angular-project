@@ -1,0 +1,47 @@
+<div class="projects-container">
+  <header class="page-header">
+    <div class="title-section">
+      <h1>פרויקטים</h1>
+    </div>
+  </header>
+
+  <div class="projects-grid">
+    @if (projects$ | async; as projects) {
+      
+      @for (project of projects; track project.id) {
+        <div class="project-card">
+          <div class="card-header">
+            <span class="status-dot"></span>
+            <h3>{{ project.name }}</h3>
+          </div>
+          
+          <div class="card-body">
+            <p> תאור: {{ project.discription }}</p>
+            <p> סטטוס: {{ project.status }}</p>
+            <p class="created-at">נוצר בתאריך: {{ project.created_at | date:'shortDate' }}</p>
+
+
+          </div>
+
+          <div class="card-actions">
+            <button [routerLink]="['/dashboard/tasks', project.id]" class="btn-outline">
+              צפה במשימות
+            </button>
+          </div>
+        </div>
+      } @empty {
+        <div class="empty-state">
+          
+          <p>לא נמצאו פרויקטים לצוות זה.</p>
+        </div>
+      }
+
+    } @else {
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p>טוען פרויקטים...</p>
+      </div>
+    }
+  </div>
+</div>
+

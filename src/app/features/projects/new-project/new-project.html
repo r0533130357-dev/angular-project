@@ -1,0 +1,27 @@
+
+<form [formGroup]="AddProjectForm" (ngSubmit)="onSubmit()">
+    <div>
+  <label for="name">שם</label>
+    <input
+      id="name"
+      type="text"
+      formControlName="name"
+      placeholder="הכנס שם "
+    />
+     @if (AddProjectForm.get('name')?.touched && AddProjectForm.get('name')?.invalid) {
+      <small>
+        @if (AddProjectForm.get('name')?.errors?.['required']) {
+          שם הוא שדה חובה
+        }
+      </small>
+    }
+    <label for="discription">תאור</label>
+    <input
+      id="discription"
+      type="text"
+      formControlName="discription"
+      placeholder="הכנס תאור "
+    />
+  </div>
+  <button type="submit" [disabled]="AddProjectForm.invalid">Create Project</button>
+</form>

@@ -1,0 +1,19 @@
+
+<form [formGroup]="AddTeamForm" (ngSubmit)="onSubmit()">
+    <div>
+  <label for="name">שם</label>
+    <input
+      id="name"
+      type="text"
+      formControlName="name"
+      placeholder="הכנס שם "
+    />
+     @if (AddTeamForm.get('name')?.touched && AddTeamForm.get('name')?.invalid) {
+      <small>
+        @if (AddTeamForm.get('name')?.errors?.['required']) {
+          שם הוא שדה חובה
+        }
+      </small>
+    }
+  </div>
+  <button type="submit" [disabled]="AddTeamForm.invalid">Create Team</button>
