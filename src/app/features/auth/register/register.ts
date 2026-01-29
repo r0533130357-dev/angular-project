@@ -33,8 +33,8 @@ export class Register {
     if (this.registerForm.valid) {
       this.auth.register(this.registerForm.value as RegisterData).subscribe({
         next: res => {
-          console.log('User registered', res);
-          this.router.navigate(['/login']);
+    
+          this.router.navigate(['/dashboard']);
         },
         error: err => {
           console.error(err);

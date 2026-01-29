@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { TeamService } from '../../../core/services/team-service';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -11,14 +11,22 @@ import { NewMember } from '../new-member/new-member';
   templateUrl: './teams.html',
   styleUrl: './teams.css'
 })
-export class TeamsComponent {
+export class TeamsComponent implements OnInit {
   private teamService = inject(TeamService);
   
-  team$ = this.teamService.getTeams();
+  team$ = this.teamService.teams$
   isLoading = signal(false);
   showAddTeam = signal(false);
   showAddMember = signal(false);
   selectedTeamId = signal<number>(0);
+
+  ngOnInit() {
+    this.isLoading.set(true);
+    this.teamService.getTeams().subscribe({
+      next: () => this.isLoading.set(false),
+      error: () => this.isLoading.set(false)
+    });
+  }
   
   openCreateTeamModal() {
     this.showAddTeam.set(true);
@@ -29,6 +37,7 @@ export class TeamsComponent {
     this.showAddMember.set(true);
   }
   
+
   closeTeamModal() {
     this.showAddTeam.set(false);
   }

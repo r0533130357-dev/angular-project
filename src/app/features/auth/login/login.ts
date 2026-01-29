@@ -30,7 +30,7 @@ export class Login {
       this.serverError = ''; // מנקה שגיאות קודמות
       this.auth.login(this.loginForm.value as LoginData).subscribe({
         next: res => {
-          console.log('User logged in', res);
+         
           this.router.navigate(['/dashboard']); 
         },
         error: err => {

@@ -30,8 +30,7 @@ ngOnInit(): void {
       }
     });
   }
-CreateProject(): void { 
-}
+
  openCreateProjectModal(): void {
     this.showAddProject.set(!this.showAddProject());
   }
