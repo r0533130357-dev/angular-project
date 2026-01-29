@@ -1,5 +1,9 @@
-<div class="modal-overlay">
-  <div class="modal-content">
+<div class="modal-overlay" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-button" (click)="onClose()" type="button" aria-label="סגור">
+      ×
+    </button>
+    
     <h3>עריכת משימה: {{ task().title }}</h3>
     
     <form [formGroup]="editForm" (ngSubmit)="onSubmit()">

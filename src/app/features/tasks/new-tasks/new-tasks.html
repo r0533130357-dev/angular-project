@@ -1,5 +1,7 @@
 <div class="modal-overlay">
   <div class="modal-content">
+    <button class="close-btn" (click)="closeModal()">✕</button>
+    
     <h2>הוספת משימה חדשה</h2>
     <form [formGroup]="addTaskForm" (ngSubmit)="onSubmit()">
       <div class="form-group">

@@ -18,13 +18,11 @@
     </div>
   }
 
-  <div class="add-comment">
-    <input 
-      [(ngModel)]="newCommentBody" 
-      placeholder="הוסף תגובה..." 
-      (keyup.enter)="postComment()" 
-    />
-    <button (click)="postComment()" [disabled]="!newCommentBody().trim()">
-    </button>
-  </div>
+<div class="add-comment-form">
+  <input 
+    class="comment-input"
+    [(ngModel)]="newCommentBody" 
+    placeholder="✍️ הוסיפי תגובה..." 
+    (keyup.enter)="postComment()" 
+  />
 </div>

@@ -2,17 +2,20 @@ import { Component, inject, input, output, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TasksService } from '../../../core/services/tasks-service';
 import { Task } from '../../../core/models/model';
+
 @Component({
   selector: 'app-update-task',
   imports: [ReactiveFormsModule],
   templateUrl: './update-task.html',
   styleUrl: './update-task.css',
 })
-export class UpdateTask {
+export class UpdateTask implements OnInit {
   private fb = inject(FormBuilder);
   private tasksService = inject(TasksService);
 
   task = input.required<Task>();
+  closeModal = output<void>(); // הוספת output לסגירת המודל
+  
   editForm = this.fb.group({
     status: ['', Validators.required],
     priority: ['', Validators.required]
@@ -25,11 +28,23 @@ export class UpdateTask {
     });
   }
 
+  onClose(): void {
+    this.closeModal.emit();
+  }
+
   onSubmit() {
     if (this.editForm.valid) {
       const { status, priority } = this.editForm.value;
 
-      this.tasksService.updateTask( this.task().id,status as string,priority as string).subscribe({     
+      this.tasksService.updateTask(
+        this.task().id,
+        status as string,
+        priority as string
+      ).subscribe({
+        next: () => {
+          // סגירה אוטומטית אחרי עדכון מוצלח
+          this.onClose();
+        },
         error: (err) => console.error('שגיאה בעדכון:', err)
       });
     }

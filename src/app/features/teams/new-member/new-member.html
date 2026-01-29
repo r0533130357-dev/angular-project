@@ -1,17 +1,25 @@
-
-<form [formGroup]="AddMemberForm" (ngSubmit)="onSubmit()">
-    <div>
-  <label for="userId">ID של המשתמש</label>
-    <input
-      formControlName="userId"
-      placeholder="הכנס מזהה חבר "
-    />
-     @if (AddMemberForm.get('userId')?.touched && AddMemberForm.get('userId')?.invalid) {
-      <small>
-        @if (AddMemberForm.get('userId')?.errors?.['required']) {
-          מזהה חבר הוא שדה חובה
+<div class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-btn" (click)="closeModal()">✕</button>
+    
+    <form [formGroup]="AddMemberForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="userId">User ID</label>
+        <input
+          id="userId"
+          type="number"
+          formControlName="userId"
+          placeholder="הכנס User ID"
+        />
+        @if (AddMemberForm.get('userId')?.touched && AddMemberForm.get('userId')?.invalid) {
+          <small>
+            @if (AddMemberForm.get('userId')?.errors?.['required']) {
+              User ID הוא שדה חובה
+            }
+          </small>
         }
-      </small>
-    }
+      </div>
+      <button type="submit" [disabled]="AddMemberForm.invalid">הוסף חבר</button>
+    </form>
   </div>
-  <button type="submit" [disabled]="AddMemberForm.invalid">Create Member</button>
+</div>

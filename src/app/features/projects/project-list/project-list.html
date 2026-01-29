@@ -2,7 +2,7 @@
     <header class="page-header">
         <div class="title-section">
             <h1>פרויקטים</h1>
-            <span class="team-badge">ID צוות: {{ teamId() }}</span>
+            <span class="team-badge">#{{ teamId() }}</span>
         </div>
         <button class="btn-primary" (click)="openCreateProjectModal()">
             <i class="plus-icon">+</i> פרויקט חדש
@@ -29,8 +29,11 @@
                         </div>
 
                         <div class="card-body">
-                            <p> תאור: {{ project.discription }}</p>
-                            <p> סטטוס: {{ project.status }}</p>
+                            <p>תאור: {{ project.discription }}</p>
+                            <p>
+                                סטטוס: 
+                                <span class="status-badge status-{{ project.status }}">{{ project.status }}</span>
+                            </p>
                             <p class="created-at">נוצר בתאריך: {{ project.created_at | date:'shortDate' }}</p>
                         </div>
 

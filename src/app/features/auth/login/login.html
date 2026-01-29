@@ -1,44 +1,58 @@
 
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div>
-  <label for="email">אימייל</label>
-    <input
-      id="email"
-      type="email"
-      formControlName="email"
-      placeholder="הכנס אימייל"
-    />
-     @if (loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
-      <small>
-        @if (loginForm.get('email')?.errors?.['required']) {
-          אימייל הוא שדה חובה
-        }
-        @if (loginForm.get('email')?.errors?.['email']) {
-          אימייל לא תקין
-        }
-      </small>
+    
+    <!-- הודעת שגיאה מהשרת -->
+    @if (serverError) {
+      <div class="server-error">
+        {{ serverError }}
+      </div>
     }
-  </div>
-    <div>   
-    <label for="password">סיסמה</label>
-    <input
-      id="password"
-      type="password"
-      formControlName="password"
-      placeholder="הכנס סיסמה"
-    />
-        @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
+    
+    <div>
+      <label for="email">אימייל</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="הכנס אימייל"
+      />
+      @if (loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
         <small>
-            @if (loginForm.get('password')?.errors?.['required']) {
-            סיסמה היא שדה חובה
-            }
-            @if (loginForm.get('password')?.errors?.['minlength']) {
-            הסיסמה חייבת להכיל לפחות 6 תווים
-            }
+          @if (loginForm.get('email')?.errors?.['required']) {
+            אימייל הוא שדה חובה
+          }
+          @if (loginForm.get('email')?.errors?.['email']) {
+            אימייל לא תקין
+          }
         </small>
-        }
+      }
+    </div>
+    
+    <div>   
+      <label for="password">סיסמה</label>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        placeholder="הכנס סיסמה"
+      />
+      @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
+        <small>
+          @if (loginForm.get('password')?.errors?.['required']) {
+            סיסמה היא שדה חובה
+          }
+          @if (loginForm.get('password')?.errors?.['minlength']) {
+            הסיסמה חייבת להכיל לפחות 6 תווים
+          }
+        </small>
+      }
     </div>
 
-
-  <button type="submit" [disabled]="loginForm.invalid">Login</button>
-
+    <button type="submit" [disabled]="loginForm.invalid">התחבר</button>
+    
+    <!-- קישור להרשמה -->
+    <p class="register-link">
+      עדיין לא נרשמת? 
+      <a routerLink="/register">הרשמה</a>
+    </p>
+</form>

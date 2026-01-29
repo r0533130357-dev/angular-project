@@ -9,7 +9,7 @@
     }
 
     @if (showEditTask()) {
-        <app-update-task [task]="selectedTask()" (close)="showEditTask.set(false)"></app-update-task>
+       <app-update-task [task]="selectedTask()" (closeModal)="showEditTask.set(false)"></app-update-task>
     }
 
     @if (isLoading()) {
@@ -30,8 +30,8 @@
                             <h3>{{ task.title }}</h3>
                             <p>{{ task.description }}</p>
                             <div class="task-meta">
-                                <span>Status: <strong>{{ task.status }}</strong></span>
-                                <span>Due: {{ task.due_date | date:'shortDate' }}</span>
+                                <span>סטטוס: <strong>{{ task.status }}</strong></span>
+                                <span>משויך ל: {{ task.due_date | date:'shortDate' }}</span>
                             </div>
                         </div>
 

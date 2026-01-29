@@ -1,0 +1,206 @@
+/* ===== Comment Section Container ===== */
+.comment-section {
+  padding: 1rem 0;
+}
+
+/* ===== Comments List ===== */
+.comments-list {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--off-white);
+  border-radius: var(--radius-md);
+}
+
+/* ===== Individual Comment ===== */
+.comment-item {
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background: white;
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--primary-color);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  animation: slideInUp 0.3s ease-out;
+}
+
+.comment-item:hover {
+  transform: translateX(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.comment-item:last-child {
+  margin-bottom: 0;
+}
+
+/* ===== Comment Header ===== */
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.comment-author {
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 0.95rem;
+}
+
+.comment-date {
+  font-size: 0.85rem;
+  color: var(--medium-gray);
+}
+
+/* ===== Comment Content ===== */
+.comment-content {
+  color: var(--dark-gray);
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+/* ===== Add Comment Form ===== */
+.add-comment-form {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.add-comment-form textarea {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid var(--light-gray);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.95rem;
+  resize: vertical;
+  min-height: 80px;
+  transition: all var(--transition-base);
+}
+
+.add-comment-form textarea:hover {
+  border-color: var(--primary-light);
+}
+
+.add-comment-form textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.add-comment-form button {
+  padding: 0.75rem 1.5rem;
+  background: var(--gradient-primary);
+  color: white;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  align-self: flex-end;
+  white-space: nowrap;
+}
+
+.add-comment-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.add-comment-form button:disabled {
+  background: var(--medium-gray);
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+/* ===== Empty State ===== */
+.no-comments {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--medium-gray);
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+/* ===== Loading State ===== */
+.loading-comments {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--medium-gray);
+  font-size: 0.95rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ===== Animations ===== */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ===== Custom Scrollbar ===== */
+.comments-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.comments-list::-webkit-scrollbar-track {
+  background: var(--light-gray);
+  border-radius: 3px;
+}
+
+.comments-list::-webkit-scrollbar-thumb {
+  background: var(--medium-gray);
+  border-radius: 3px;
+}
+
+.comments-list::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-gray);
+}
+/* ===== Comment Input Only ===== */
+.add-comment-form {
+  margin-top: 1rem;
+}
+
+.comment-input {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+
+  border-radius: 999px; /* עגול כמו צ'אט */
+  border: 2px solid var(--light-gray);
+
+  background: white;
+  font-size: 0.95rem;
+
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+}
+
+/* hover */
+.comment-input:hover {
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-md);
+}
+
+/* focus */
+.comment-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.12);
+  transform: scale(1.01);
+}
+
+/* כשיש טקסט */
+.comment-input:not(:placeholder-shown) {
+  border-color: var(--primary-color);
+}

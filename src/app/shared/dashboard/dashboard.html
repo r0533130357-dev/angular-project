@@ -1,27 +1,21 @@
-<div class="dashboard-layout">
-  <aside class="sidebar">
-    <div class="logo">
-      <h2>WolfTasks</h2>
-    </div>
+<div class="dashboard-container">
+  <div class="welcome-section">
+    <h1 class="welcome-title">ברוך הבא, {{ userName$ | async }}</h1>
+  </div>
 
-    <nav class="nav-menu">
-      <a routerLink="/dashboard/teams" routerLinkActive="active" class="nav-item">
-        <span class="icon">👥</span> צוותים
-      </a>
-      
-      <a routerLink="/dashboard/all-projects" routerLinkActive="active" class="nav-item">
-        <span class="icon">📁</span> כל הפרויקטים
-      </a>
-    </nav>
-  </aside>
+  <div class="navigation-buttons">
+    <a routerLink="/dashboard/teams" routerLinkActive="active" class="nav-btn">
+      <span class="btn-icon">👥</span>
+      הצוותים שלי
+    </a>
 
-  <main class="main-content">
-    <header class="top-bar">
-      <span>ברוך הבא, {{ userName$ | async }}</span>
-    </header>
-    
-    <div class="content-area">
-      <router-outlet></router-outlet>
-    </div>
-  </main>
+    <a routerLink="/dashboard/all-projects" routerLinkActive="active" class="nav-btn">
+      <span class="btn-icon">📁</span>
+      כל הפרויקטים
+    </a>
+  </div>
+
+  <div class="content-area">
+    <router-outlet></router-outlet>
+  </div>
 </div>

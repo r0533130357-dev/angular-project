@@ -1,27 +1,36 @@
-
-<form [formGroup]="AddProjectForm" (ngSubmit)="onSubmit()">
-    <div>
-  <label for="name">שם</label>
-    <input
-      id="name"
-      type="text"
-      formControlName="name"
-      placeholder="הכנס שם "
-    />
-     @if (AddProjectForm.get('name')?.touched && AddProjectForm.get('name')?.invalid) {
-      <small>
-        @if (AddProjectForm.get('name')?.errors?.['required']) {
-          שם הוא שדה חובה
+<div class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-btn" (click)="closeModal()">✕</button>
+    
+    <form [formGroup]="AddProjectForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="name">שם הפרויקט</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="הכנס שם"
+        />
+        @if (AddProjectForm.get('name')?.touched && AddProjectForm.get('name')?.invalid) {
+          <small>
+            @if (AddProjectForm.get('name')?.errors?.['required']) {
+              שם הוא שדה חובה
+            }
+          </small>
         }
-      </small>
-    }
-    <label for="discription">תאור</label>
-    <input
-      id="discription"
-      type="text"
-      formControlName="discription"
-      placeholder="הכנס תאור "
-    />
+      </div>
+      
+      <div>
+        <label for="discription">תיאור</label>
+        <textarea
+          id="discription"
+          formControlName="discription"
+          placeholder="הכנס תיאור (אופציונלי)"
+          rows="4"
+        ></textarea>
+      </div>
+      
+      <button type="submit" [disabled]="AddProjectForm.invalid">צור פרויקט</button>
+    </form>
   </div>
-  <button type="submit" [disabled]="AddProjectForm.invalid">Create Project</button>
-</form>
+</div>

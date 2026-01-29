@@ -1,19 +1,25 @@
-
-<form [formGroup]="AddTeamForm" (ngSubmit)="onSubmit()">
-    <div>
-  <label for="name">שם</label>
-    <input
-      id="name"
-      type="text"
-      formControlName="name"
-      placeholder="הכנס שם "
-    />
-     @if (AddTeamForm.get('name')?.touched && AddTeamForm.get('name')?.invalid) {
-      <small>
-        @if (AddTeamForm.get('name')?.errors?.['required']) {
-          שם הוא שדה חובה
+<div class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-btn" (click)="closeModal()">✕</button>
+    
+    <form [formGroup]="AddTeamForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="name">שם</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="הכנס שם"
+        />
+        @if (AddTeamForm.get('name')?.touched && AddTeamForm.get('name')?.invalid) {
+          <small>
+            @if (AddTeamForm.get('name')?.errors?.['required']) {
+              שם הוא שדה חובה
+            }
+          </small>
         }
-      </small>
-    }
+      </div>
+      <button type="submit" [disabled]="AddTeamForm.invalid">צור צוות</button>
+    </form>
   </div>
-  <button type="submit" [disabled]="AddTeamForm.invalid">Create Team</button>
+</div>

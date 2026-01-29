@@ -6,37 +6,43 @@ import { CreateTaskRequest } from '../../../core/models/model';
   selector: 'app-new-tasks',
   imports: [ReactiveFormsModule],
   templateUrl: './new-tasks.html',
-  styleUrl: './new-tasks.css',
+  styleUrl: './new-tasks.css'
 })
 export class NewTasks {
-private fb = inject(FormBuilder);
+  private fb = inject(FormBuilder);
   private tasksService = inject(TasksService);
+  
   projectId = input.required<number>();
-
+  close = output<void>();
+  
   addTaskForm = this.fb.group({
     title: ['', [Validators.required]],
     description: [''],
-    priority: ['medium', [Validators.required]],
+    priority: ['medium'],
     dueDate: ['']
-  });
-
+  })
+  
   onSubmit() {
     if (this.addTaskForm.valid) {
-      const taskData: CreateTaskRequest = {
-        projectId: this.projectId(),
+      this.closeModal();
+      const taskData = {
         title: this.addTaskForm.value.title as string,
-        description: this.addTaskForm.value.description || '',
-        priority: this.addTaskForm.value.priority || 'medium',
-        dueDate: this.addTaskForm.value.dueDate || undefined,
-        status: 'todo' 
+        description: this.addTaskForm.value.description as string,
+        priority: this.addTaskForm.value.priority as string,
+        due_date: this.addTaskForm.value.dueDate as string,
+        projectId: this.projectId()
       };
-
-      this.tasksService.createTask(taskData).subscribe({
-        next: (res) => {
-          console.log('Task added successfully', res);
+      
+      this.tasksService.createTask(taskData as CreateTaskRequest).subscribe({
+        next: res => {
+          console.log('Task created', res);
         },
-        error: (err) => console.error('Error adding task:', err)
+        error: err => console.error(err)
       });
     }
+  }
+  
+  closeModal() {
+    this.close.emit();
   }
 }

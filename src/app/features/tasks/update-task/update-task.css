@@ -1,0 +1,175 @@
+/* ===== Modal Overlay ===== */
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* ===== Modal Content Wrapper ===== */
+.modal-content {
+  position: relative;
+  max-width: 700px; /* הרחבנו מ-600px ל-700px */
+  width: 120%;
+  background: white;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  animation: slideInUp 0.4s ease-out;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* ===== Close Button (X) ===== */
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  color: #666;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.close-button:hover {
+  background: #f3f4f6;
+  color: #000;
+  transform: rotate(90deg);
+}
+
+/* ===== Form Container ===== */
+form {
+  padding: 2.5rem;
+}
+
+/* ===== Form Title ===== */
+h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== Form Groups ===== */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* ===== Labels ===== */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--dark-gray);
+  font-size: 1rem;
+}
+
+/* ===== Inputs & Textarea & Select ===== */
+input, textarea, select {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid var(--light-gray);
+  border-radius: var(--radius-md);
+  background: white;
+  font-size: 1rem;
+  color: var(--dark-gray);
+  transition: all var(--transition-base);
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+input:hover, textarea:hover, select:hover {
+  border-color: #4299e1;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 4px rgba(49, 130, 206, 0.1);
+  transform: translateY(-1px);
+}
+
+/* ===== Error Messages ===== */
+small {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--error-red);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* ===== Modal Actions ===== */
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* ===== Submit Button ===== */
+.btn-save {
+  flex: 1;
+  padding: 1rem;
+  background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+  color: white;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.btn-save:not(:disabled):hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-save:disabled {
+  background: var(--medium-gray);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

@@ -1,6 +1,11 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
-  <!-- שם מלא -->
+  @if (serverError) {
+    <div class="server-error">
+      {{ serverError }}
+    </div>
+  }
+
   <div>
     <label for="name">שם מלא</label>
     <input
@@ -21,7 +26,6 @@
     }
   </div>
 
-  <!-- אימייל -->
   <div>
     <label for="email">אימייל</label>
     <input
@@ -42,7 +46,6 @@
     }
   </div>
 
-  <!-- סיסמה -->
   <div>
     <label for="password">סיסמה</label>
     <input
@@ -63,9 +66,10 @@
     }
   </div>
 
-  <button type="submit" [disabled]="registerForm.invalid">Register</button>
-</form>
-   <p>
+  <button type="submit">הרשמה</button>
+  
+  <p class="login-link">
     יש לך כבר חשבון?
     <a routerLink="/login">התחבר</a>
   </p>
+</form>
