@@ -19,7 +19,8 @@ export class NewTasks {
     title: ['', [Validators.required]],
     description: [''],
     priority: ['medium'],
-    dueDate: ['']
+    dueDate: [''],
+    assignedTo: ['']
   })
   
   onSubmit() {
@@ -30,7 +31,8 @@ export class NewTasks {
         description: this.addTaskForm.value.description as string,
         priority: this.addTaskForm.value.priority as string,
         due_date: this.addTaskForm.value.dueDate as string,
-        projectId: this.projectId()
+        projectId: this.projectId(),
+        assigneeId: this.addTaskForm.value.assignedTo as number | null
       };
       
       this.tasksService.createTask(taskData as CreateTaskRequest).subscribe({
