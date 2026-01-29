@@ -32,7 +32,7 @@ export class NewTasks {
         priority: this.addTaskForm.value.priority as string,
         due_date: this.addTaskForm.value.dueDate as string,
         projectId: this.projectId(),
-        assigneeId: this.addTaskForm.value.assignedTo as number | null
+        assigneeId: Number(this.addTaskForm.value.assignedTo) 
       };
       
       this.tasksService.createTask(taskData as CreateTaskRequest).subscribe({
